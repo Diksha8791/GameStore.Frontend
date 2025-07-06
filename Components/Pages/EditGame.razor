@@ -10,7 +10,7 @@ else
 {
 <div class="row">
     <div class=col-md-4>
-        <EditForm Model="@game" FormName="editGame" OnValidSubmit="HandleValidSubmit">
+        <EditForm Model="@game" FormName="editGame" OnSubmit="HandleValidSubmit">
             @* <DataAnnotationsValidator />
             <ValidationSummary /> *@
 
@@ -49,6 +49,7 @@ else
 
 
 @code{
+    [SupplyParameterFromForm]
     private GameDetails game {get; set;} = new(){
         Name = string.Empty,
         ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow)
@@ -56,14 +57,16 @@ else
 
     private GenresClient genresClient = new();
 
+    private GamesClient gamesClient = new();
+
     private Genre[]? genres;
 
     protected override void OnInitialized(){
         genres = genresClient.GetGenres();
     }
 
-    private async Task HandleValidSubmit()
+    private void HandleValidSubmit()
     {
-       
+       gamesClient.AddGame(game);
     }
 }
