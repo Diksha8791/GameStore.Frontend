@@ -11,7 +11,7 @@ public class GenresClient
         },
          new (){
             Id = 2,
-            Name = "Role Playing"
+            Name = "Roleplaying"
         },
          new (){
             Id = 3,
